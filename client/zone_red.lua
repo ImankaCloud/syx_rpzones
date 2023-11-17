@@ -1,9 +1,9 @@
 local isMessageSent = false
-local playerPed = GetPlayerPed(-1)
+local playerPed = PlayerPedId()
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(10)
+        Wait(10)
 
         local pedCoords = GetEntityCoords(playerPed)
         local isInZone = false
@@ -32,7 +32,7 @@ Citizen.CreateThread(function()
 end)
 
 if Config.RadiusBlip and Config.RedRadiusBlipDisable then
-    Citizen.CreateThread(function()
+    CreateThread(function()
         for _, zone in pairs(Config.Redzones) do
             local radiusBlip = AddBlipForRadius(zone.Coords.x, zone.Coords.y, zone.Coords.z, zone.Radius)
             SetBlipRotation(radiusBlip, 0)
